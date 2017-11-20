@@ -1,0 +1,36 @@
+{
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "37526DA425E5430474A14FBFA1BC4525160B5FC1" : 0,
+    "DA298CE2AB975BA2CF43E11863DF98F71A466522" : 0,
+    "90E2F969A762FB62C413A0C44D1F334E6EC3F531" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "225B3D1E-1535-4EDD-AE02-EC43D452D5BD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "37526DA425E5430474A14FBFA1BC4525160B5FC1" : "C++\/of_v0.9.8\/addons\/ofxCv\/",
+    "DA298CE2AB975BA2CF43E11863DF98F71A466522" : "C++\/of_v0.9.8\/addons\/ofxGLEditor\/",
+    "90E2F969A762FB62C413A0C44D1F334E6EC3F531" : "C++\/of_v0.9.8\/addons\/ofxMidi\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Ciclux",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "of_v0.9.8\/apps\/myApps\/Ciclux\/Ciclux.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kylemcdonald\/ofxCv.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "37526DA425E5430474A14FBFA1BC4525160B5FC1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/danomatika\/ofxMidi.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "90E2F969A762FB62C413A0C44D1F334E6EC3F531"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Akira-Hayasaka\/ofxGLEditor.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DA298CE2AB975BA2CF43E11863DF98F71A466522"
+    }
+  ]
+}
