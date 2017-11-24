@@ -3,7 +3,6 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxXmlSettings.h"
-#include "GuiApp.h"
 #include "ofxCv.h"
 #define NUM 1280
 #define LIM 8
@@ -94,8 +93,7 @@ class ofApp : public ofBaseApp{
         float scaleX, scaleY;
     
         ofTrueTypeFont text;
-    
-        shared_ptr<GuiApp> gui;
+
         int tp = 1;
         int tp1 = 1;
 };

@@ -1,5 +1,4 @@
 ofxCv
-ofxGLEditor
 ofxOpenCv
 ofxOsc
 ofxXmlSettings

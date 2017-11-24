@@ -8,7 +8,7 @@ using namespace cv;
 void ofApp::setup(){
     
     //ofSetWindowShape(2560, 1440);
-    ofSetWindowShape(1280, 768);
+    ofSetWindowShape(600, 400);
     ofSetWindowTitle("CineVivo");
     ofSetBackgroundColor(125);
     //ofSetFrameRate(30);
@@ -226,7 +226,13 @@ void ofApp::update(){
                 if (m.getAddress() == "/edge"){
                     edges[m.getArgAsInt(0)] = m.getArgAsBool(1);
                 }
-                if (m.getAddress() == "/points"){
+                if (m.getAddress() == "/points" && m.getNumArgs() == 7){
+                    one[m.getArgAsInt(0)].set(ofPoint(m.getArgAsInt(1),m.getArgAsInt(2)));
+                    two[m.getArgAsInt(0)].set(ofPoint(m.getArgAsInt(1),m.getArgAsInt(2)));
+                    three[m.getArgAsInt(0)].set(ofPoint(m.getArgAsInt(3),m.getArgAsInt(4)));
+                    four[m.getArgAsInt(0)].set(ofPoint(m.getArgAsInt(5),m.getArgAsInt(6)));
+                }
+                if (m.getAddress() == "/points" && m.getNumArgs() == 9){
                     one[m.getArgAsInt(0)].set(ofPoint(m.getArgAsInt(1),m.getArgAsInt(2)));
                     two[m.getArgAsInt(0)].set(ofPoint(m.getArgAsInt(3),m.getArgAsInt(4)));
                     three[m.getArgAsInt(0)].set(ofPoint(m.getArgAsInt(5),m.getArgAsInt(6)));
@@ -382,7 +388,7 @@ void ofApp::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseEntered(int x, int y){
-    ofHideCursor();
+    //ofHideCursor();
 }
 
 //--------------------------------------------------------------
@@ -406,5 +412,19 @@ void ofApp::exit() {
 }
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
-
+    FILE = std::accumulate(begin(dragInfo.files),end(dragInfo.files),FILE);
+    video.stop();
+    vIndex[0] = 1;
+    vIndexPlaying[0] = 1;
+    videoLC[0].load(FILE);
+    videoLC[0].play();
+    fboBlurOnePass[0].allocate(cam.getWidth(),cam.getHeight(),GL_RGBA);
+    fboBlurTwoPass[0].allocate(cam.getWidth(),cam.getHeight(),GL_RGBA);
+    four[0].set(ofPoint(0,vH[0]));
+    three[0].set(ofPoint( vW[0] ,vH[0]));
+    two[0].set(ofPoint(vW[0],0));
+    vW[0] = videoLC[0].getWidth();
+    vH[0] = videoLC[0].getHeight();
+    FILE.clear();
+    dragInfo.files.clear();
 }
