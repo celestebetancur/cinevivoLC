@@ -3,7 +3,6 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxXmlSettings.h"
-#include "ofxCv.h"
 #define NUM 1280
 #define LIM 8
 
@@ -66,10 +65,10 @@ class ofApp : public ofBaseApp{
         ofFbo fboBlurTwoPass[LIM];
     
         // Edge
-        bool edges[LIM];
+        /*bool edges[LIM];
         ofPixels previous, previous1, previous2, previous3, previous4, previous5, previous6, previous7, previous8;
         ofImage diff, diff1,  diff2, diff3, diff4, diff5, diff6, diff7, diff8;
-        cv::Scalar diffMean[LIM];
+        cv::Scalar diffMean[LIM];*/
     
         // CineVivo RUIDO version
     

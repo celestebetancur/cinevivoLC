@@ -1,8 +1,8 @@
 #include "ofApp.h"
 #include <iostream>
 
-using namespace ofxCv;
-using namespace cv;
+/*using namespace ofxCv;
+using namespace cv;*/
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -72,7 +72,7 @@ void ofApp::setup(){
         vRotZ[i] = 0;
         vSpeed[i] = 1;
         vBlur[i] = 0;
-        edges[i] = false;
+        //edges[i] = false;
         camON[i] = false;
         one[i].set(0,0);
     }
@@ -122,7 +122,7 @@ void ofApp::update(){
                         pix.allocate(vW[0] , vH[0], OF_PIXELS_RGBA);
                         texVideoOne.allocate(pix);
                     }
-                    if(edges[m.getArgAsInt(0)] == true && m.getArgAsInt(0) == 0){
+                    /*if(edges[m.getArgAsInt(0)] == true && m.getArgAsInt(0) == 0){
                         imitate(previous, videoLC[m.getArgAsInt(0)]);
                         imitate(diff,  videoLC[m.getArgAsInt(0)]);
                     }
@@ -157,7 +157,7 @@ void ofApp::update(){
                     if(edges[m.getArgAsInt(0)] == true && m.getArgAsInt(0) == 8){
                         imitate(previous8, videoLC[m.getArgAsInt(0)]);
                         imitate(diff8,  videoLC[m.getArgAsInt(0)]);
-                    }
+                    }*/
                 }
                 if (m.getAddress() == "/pos"){
                     vX[m.getArgAsInt(0)] = m.getArgAsInt(1);
@@ -223,9 +223,9 @@ void ofApp::update(){
                 if (m.getAddress() == "/blur"){
                     vBlur[m.getArgAsInt(0)] = m.getArgAsInt(1);
                 }
-                if (m.getAddress() == "/edge"){
+                /*if (m.getAddress() == "/edge"){
                     edges[m.getArgAsInt(0)] = m.getArgAsBool(1);
-                }
+                }*/
                 if (m.getAddress() == "/points" && m.getNumArgs() == 7){
                     one[m.getArgAsInt(0)].set(ofPoint(m.getArgAsInt(1),m.getArgAsInt(2)));
                     two[m.getArgAsInt(0)].set(ofPoint(m.getArgAsInt(1),m.getArgAsInt(2)));
@@ -242,7 +242,7 @@ void ofApp::update(){
         }
     }
     // TODO: edge for cams
-    for(int i = 0; i < LIM; i++){
+    /*for(int i = 0; i < LIM; i++){
         if(vIndexPlaying[i] != 0){
             videoLC[i].update();
             pix = videoLC[i].getPixels();
@@ -253,7 +253,7 @@ void ofApp::update(){
                 copy(videoLC[i], previous);
             }
         }
-    }
+    }*/
          /*   if(edges[i] == true && i == 1){
                 absdiff(videoLC[i], previous1, diff1);
                 diff1.update();
@@ -319,12 +319,12 @@ void ofApp::draw(){
             shaderBlurX[i].begin();
             shaderBlurX[i].setUniform1f("blurAmnt", vBlur[i]);*/
             videoLC[i].setSpeed(vSpeed[i]);
-            if(edges[i] == false && camON[i] == false)
+            if(camON[i] == false)
                 texVideoOne.draw(one[i], two[i], three[i], four[i]);
-            if(edges[i] == false && camON[i] == true)
+            if(camON[i] == true)
                 //cam.draw(0,0);
                 cam.getTexture().draw(one[i],two[i],three[i],four[i]);
-            if(edges[i] == true && i == 0)
+            /*if(edges[i] == true && i == 0)
                 diff.getTexture().draw(one[i], two[i], three[i], four[i]);
             if(edges[i] == true && i == 1)
                 diff1.draw(0,0);
@@ -341,7 +341,7 @@ void ofApp::draw(){
             if(edges[i] == true && i == 7)
                 diff7.draw(0,0);
             if(edges[i] == true && i == 8)
-                diff8.draw(0,0);
+                diff8.draw(0,0);*/
             /*shaderBlurX[i].end();
             fboBlurOnePass[i].end();
             fboBlurTwoPass[i].begin();
