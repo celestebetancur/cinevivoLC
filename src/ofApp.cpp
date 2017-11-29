@@ -13,7 +13,6 @@ void ofApp::setup(){
     ofSetBackgroundColor(125);
     //ofSetFrameRate(30);
     ofSetVerticalSync(false);
-    cam.setup(cam.getWidth(), cam.getHeight());
     
     scaleX = 1;
     scaleY = 1;
@@ -75,9 +74,9 @@ void ofApp::setup(){
         //edges[i] = false;
         camON[i] = false;
         one[i].set(0,0);
+        pix[i].allocate(1280, 720, OF_PIXELS_RGBA);
+        texVideo[i].allocate(pix[i]);
     }
-    pix.allocate(1280, 720, OF_PIXELS_RGBA);
-    texVideoOne.allocate(pix);
 }
 
 //--------------------------------------------------------------
@@ -94,6 +93,7 @@ void ofApp::update(){
             if(m.getArgAsInt(0) >= 0 &&  m.getArgAsInt(0) < LIM){
                 if (m.getAddress() == "/load"){
                     if (m.getArgAsString(1) == "camera"){
+                        cam.setup(cam.getWidth(), cam.getHeight());
                         vIndex[m.getArgAsInt(0)] = 1;
                         vIndexPlaying[m.getArgAsInt(0)] = 1;
                         fboBlurOnePass[m.getArgAsInt(0)].allocate(cam.getWidth(),cam.getHeight(),GL_RGBA);
@@ -104,8 +104,8 @@ void ofApp::update(){
                         four[m.getArgAsInt(0)].set(ofPoint(0,vH[m.getArgAsInt(0)]));
                         three[m.getArgAsInt(0)].set(ofPoint( vW[m.getArgAsInt(0)] ,vH[m.getArgAsInt(0)]));
                         two[m.getArgAsInt(0)].set(ofPoint(vW[m.getArgAsInt(0)],0));
-                        pix.allocate(cam.getWidth() , cam.getHeight(), OF_PIXELS_RGB);
-                        texVideoOne.allocate(pix);
+                        pix[m.getArgAsInt(0)].allocate(cam.getWidth() , cam.getHeight(), OF_PIXELS_RGB);
+                        texVideo[m.getArgAsInt(0)].allocate(pix[m.getArgAsInt(0)]);
                     } else {
                         string temp = "videos/"+m.getArgAsString(1);
                         vIndex[m.getArgAsInt(0)] = 1;
@@ -119,8 +119,8 @@ void ofApp::update(){
                         four[m.getArgAsInt(0)].set(ofPoint(0,vH[m.getArgAsInt(0)]));
                         three[m.getArgAsInt(0)].set(ofPoint( vW[m.getArgAsInt(0)] ,vH[m.getArgAsInt(0)]));
                         two[m.getArgAsInt(0)].set(ofPoint(vW[m.getArgAsInt(0)],0));
-                        pix.allocate(vW[0] , vH[0], OF_PIXELS_RGBA);
-                        texVideoOne.allocate(pix);
+                        pix[m.getArgAsInt(0)].allocate(vW[0] , vH[0], OF_PIXELS_RGBA);
+                        texVideo[m.getArgAsInt(0)].allocate(pix[m.getArgAsInt(0)]);
                     }
                     /*if(edges[m.getArgAsInt(0)] == true && m.getArgAsInt(0) == 0){
                         imitate(previous, videoLC[m.getArgAsInt(0)]);
@@ -169,6 +169,11 @@ void ofApp::update(){
                 if (m.getAddress() == "/posY"){
                     vY[m.getArgAsInt(0)] = m.getArgAsInt(1);
                 }
+                if (m.getAddress() == "/rot"){
+                    vRotX[m.getArgAsInt(0)] = m.getArgAsFloat(1);
+                    vRotY[m.getArgAsInt(0)] = m.getArgAsFloat(2);
+                    vRotZ[m.getArgAsInt(0)] = m.getArgAsFloat(3);
+                }
                 if (m.getAddress() == "/rotX"){
                     vRotX[m.getArgAsInt(0)] = m.getArgAsFloat(1);
                 }
@@ -189,6 +194,7 @@ void ofApp::update(){
                     vW[m.getArgAsInt(0)] = m.getArgAsFloat(1);
                 }
                 if (m.getAddress() == "/scale"){
+                    
                     vScaleX[m.getArgAsInt(0)] = m.getArgAsFloat(1);
                     vScaleY[m.getArgAsInt(0)] = m.getArgAsFloat(2);
                 }
@@ -242,18 +248,18 @@ void ofApp::update(){
         }
     }
     // TODO: edge for cams
-    /*for(int i = 0; i < LIM; i++){
+    for(int i = 0; i < LIM; i++){
         if(vIndexPlaying[i] != 0){
             videoLC[i].update();
-            pix = videoLC[i].getPixels();
-            texVideoOne.loadData(pix);
-            if(edges[i] == true && i == 0){
+            pix[i] = videoLC[i].getPixels();
+            texVideo[i].loadData(pix[i]);
+            /*if(edges[i] == true && i == 0){
                 absdiff(videoLC[i], previous, diff);
                 diff.update();
                 copy(videoLC[i], previous);
-            }
+            }*/
         }
-    }*/
+    }
          /*   if(edges[i] == true && i == 1){
                 absdiff(videoLC[i], previous1, diff1);
                 diff1.update();
@@ -314,13 +320,13 @@ void ofApp::draw(){
             ofRotateX(vRotX[i]);
             ofRotateY(vRotY[i]);
             ofRotateZ(vRotZ[i]);
-            ofScale(1*vScaleX[i],1*vScaleY[i]);
+            ofScale(vScaleX[i],vScaleY[i]);
             /*fboBlurOnePass[i].begin();
             shaderBlurX[i].begin();
             shaderBlurX[i].setUniform1f("blurAmnt", vBlur[i]);*/
             videoLC[i].setSpeed(vSpeed[i]);
             if(camON[i] == false)
-                texVideoOne.draw(one[i], two[i], three[i], four[i]);
+                texVideo[i].draw(one[i], two[i], three[i], four[i]);
             if(camON[i] == true)
                 //cam.draw(0,0);
                 cam.getTexture().draw(one[i],two[i],three[i],four[i]);

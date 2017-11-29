@@ -4,7 +4,7 @@
 #include "ofxOsc.h"
 #include "ofxXmlSettings.h"
 #define NUM 1280
-#define LIM 8
+#define LIM 10
 
 class ofApp : public ofBaseApp{
 
@@ -36,8 +36,8 @@ class ofApp : public ofBaseApp{
         // CineVivo LiveCoding
         //ofPoint one[LIM],two[LIM],three[LIM],four[LIM];
         ofVec2f one[LIM],two[LIM],three[LIM],four[LIM];
-        ofTexture texVideoOne;
-        ofPixels pix;
+        ofTexture texVideo[LIM];
+        ofPixels pix[LIM];
     
         ofVideoGrabber cam;
         bool camON[LIM];
